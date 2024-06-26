@@ -13,6 +13,9 @@ export function highestPercentage(input: string): number {
 	const percentages = input.match(/\d+(?=%)/g);
 	if (!percentages) return 0;
 
-	const numericPercentages = percentages.map(Number);
-	return Math.max(...numericPercentages);
+	const numericPercentages = percentages
+		.map(Number)
+		.filter((percentage) => percentage !== 100); // Omit 100
+
+	return numericPercentages.length > 0 ? Math.max(...numericPercentages) : 0;
 }
