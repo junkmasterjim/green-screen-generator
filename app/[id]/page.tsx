@@ -7,6 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Page = ({ params }: { params: { id: string } }) => {
   const [prediction, setPrediction] = useState<any>();
@@ -47,6 +48,24 @@ const Page = ({ params }: { params: { id: string } }) => {
 
   return (
     <section className="container p-6 flex flex-col gap-8 items-center justify-center text-center min-h-[80vh]">
+      <div className="flex flex-col items-center justify-center text-center">
+        <h2 className="text-lg font-semibold tracking-tighter">
+          prediction id:
+        </h2>
+        <p className="text-xs tracking-tight">{params.id}</p>
+        <Button
+          variant={"ghost"}
+          className="h-auto py-2 leading=[1.1] mt-2"
+          onClick={() => {
+            navigator.clipboard.writeText(
+              "https://greenscreengenerator.com/" + params.id,
+            );
+            toast.success("Copied url to clipboard!");
+          }}
+        >
+          Copy link
+        </Button>
+      </div>
       {prediction && prediction.input.input_video && (
         <div className="flex items-center justify-center flex-col gap-2">
           <h2 className="font-semibold tracking-tighter text-3xl">
