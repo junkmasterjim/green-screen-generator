@@ -33,8 +33,8 @@ const Page = ({ params }: { params: { id: string } }) => {
         }
       } catch (error) {
         console.error("Error fetching prediction:", error);
+        toast.error("Sorry, something went wrong.");
         setIsLoading(false);
-        router.push("/?error=" + error);
       }
     };
 
